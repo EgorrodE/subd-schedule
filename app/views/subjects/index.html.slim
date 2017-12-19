@@ -1,0 +1,42 @@
+.block
+  - if @subjects.any?
+    h1 Listing subjects
+    table
+      thead
+        tr
+          th
+            | Name
+          th
+            | Required Classroom Types
+          th
+
+      tbody
+        - @subjects.each do |subject|
+          tr
+            td.text
+              = subject.name
+            td.many-to-many
+              = form_tag add_classroom_type_to_subject_path, class: 'form' do
+                = hidden_field_tag :subject_id, subject.id
+                .relations
+                  - subject.classroom_types.each do |classroom_type|
+                    .relation
+                      = classroom_type.name
+                      = link_to '×', remove_classroom_type_from_subject_path(subject_id: subject.id, classroom_type_id: classroom_type.id), method: :delete, class: 'remove-link'
+                .add-relation
+                  - classroom_types = @classroom_types.reject { |ct| subject.classroom_type_ids.include? ct.id }.map { |ct| [ct.name, ct.id] }
+                  - if classroom_types.any?
+                    = select_tag :classroom_type_id, options_for_select(classroom_types)
+                    = submit_tag 'Add'
+            td
+              = link_to 'Edit', subjects_path(id: subject.id)
+              = link_to 'Delete', subject, data: { confirm: 'Are you sure?' }, method: :delete
+  - else
+    h1 No subjects yet
+
+.block
+  h1 Add new subject
+  = render partial: 'subjects/form', locals: { subject: @new_subject }
+  - if @edit_subject
+    h1 Edit subject
+    = render partial: 'subjects/form', locals: { subject: @edit_subject }

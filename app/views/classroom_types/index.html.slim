@@ -1,0 +1,27 @@
+.block
+  - if @classroom_types.any?
+    h1 Listing classroom_types
+    table
+      thead
+        tr
+          th
+            | Name
+          th
+
+      tbody
+        - @classroom_types.each do |c|
+          tr
+            td.text
+              = c.name
+            td
+              = link_to 'Edit', classroom_types_path(id: c.id)
+              = link_to 'Delete', c, data: { confirm: 'Are you sure?' }, method: :delete
+  - else
+    h1 No classroom_types yet
+
+.block
+  h1 Add new classroom_type
+  = render partial: 'classroom_types/form', locals: { classroom_type: @new_classroom_type }
+  - if @edit_classroom_type
+    h1 Edit classroom_type
+    = render partial: 'classroom_types/form', locals: { classroom_type: @edit_classroom_type }

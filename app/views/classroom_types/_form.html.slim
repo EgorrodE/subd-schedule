@@ -1,0 +1,9 @@
+= form_for classroom_type do |f|
+  - if classroom_type.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(classroom_type.errors.count, "error")} prohibited this classroom_type from being saved:"
+      ul
+        - classroom_type.errors.full_messages.each do |message|
+          li = message
+  = f.text_field :name, placeholder: 'name'
+  = f.submit

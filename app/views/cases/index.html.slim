@@ -1,0 +1,27 @@
+.block
+  - if @cases.any?
+    h1 Listing cases
+    table
+      thead
+        tr
+          th
+            | Name
+          th
+
+      tbody
+        - @cases.each do |c|
+          tr
+            td.text
+              = c.name
+            td
+              = link_to 'Edit', cases_path(id: c.id)
+              = link_to 'Delete', c, data: { confirm: 'Are you sure?' }, method: :delete
+  - else
+    h1 No cases yet
+
+.block
+  h1 Add new case
+  = render partial: 'cases/form', locals: { editable_case: @new_case }
+  - if @edit_case
+    h1 Edit case
+    = render partial: 'cases/form', locals: { editable_case: @edit_case }

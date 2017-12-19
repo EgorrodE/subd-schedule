@@ -1,0 +1,16 @@
+.block
+  h1 Teachers by weekday and classroom
+  - if @teachers.any?
+    - count = @teachers.count
+    h2 = "#{count} teacher#{(count > 1 ? 's' : '')} found"
+    = render partial: 'teachers/table', locals: {show_pair: true}
+
+  - else
+    h2 No teachers found
+.block
+  h1 Params
+  = form_tag custom_request1_path, method: :get, class: 'form' do
+    = text_field_tag :classroom_name, '', placeholder: 'Classroom',  required: true
+    = select_tag :weekday_id, options_for_select(@weekdays), required: true
+    = submit_tag "Find"
+

@@ -1,0 +1,23 @@
+.block
+  h2
+    | Tables
+  .links
+    .row
+      = link_to "Classrooms", classrooms_path, class: 'link'
+      = link_to "Cases", cases_path, class: 'link'
+      = link_to "Classroom Types", classroom_types_path, class: 'link'
+      = link_to "Pairs", pairs_path, class: 'link'
+    .row
+      = link_to "Schedule Places", schedule_places_path, class: 'link'
+      = link_to "Subjects", subjects_path, class: 'link'
+      = link_to "Teachers", teachers_path, class: 'link'
+.block
+  h2
+    | Custom requests
+  .links
+    .row
+      = link_to "Teachers by weekday and classroom", custom_request1_path, class: 'link'
+    .row
+      = link_to "Teachers who don't work on Monday and Thursday", custom_request2_path, class: 'link'
+    .row
+      = link_to "Most avaliable weekdays", custom_request3_path, class: 'link'

@@ -1,0 +1,45 @@
+.block
+  - if @grouped_pairs.any?
+    h1 Listing Pairs
+
+    table
+      thead
+        tr
+          th
+            | Teacher
+          th
+            | Subject
+          th
+            | Weekday
+          th
+            | start
+          th
+            | end
+          th
+            | Classroom
+          th
+
+      tbody
+        - @grouped_pairs.each do |teacher, pairs|
+          - pairs.each_with_index do |pair, i|
+            tr class=(i == 0 ? 'first-in-group' : '')
+              td.text
+                - if i == 0
+                  = link_to teacher, teachers_path(id: pair.teacher_id)
+              td = pair.subject.name
+              td = pair.schedule_place.weekday.name
+              td = pair.schedule_place.start_time.strftime('%H:%M')
+              td = pair.schedule_place.end_time.strftime('%H:%M')
+              td = "#{pair.classroom.case.name} - #{pair.classroom.name}"
+              td
+                = link_to 'Edit', pairs_path(pair, id: pair.id)
+                = link_to 'Delete', pair, data: { confirm: 'Are you sure?' }, method: :delete
+
+  - else
+    h1 No pairs yet
+.block
+  h1 Add Pair
+  = render partial: 'pairs/form', locals: { pair: @new_pair }
+  - if @edit_pair
+    h1 Edit Pair
+    = render partial: 'pairs/form', locals: { pair: @edit_pair }

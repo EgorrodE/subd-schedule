@@ -1,0 +1,9 @@
+.block
+  h1 Teachers who don't work on Monday and Thursday
+  - if @teachers.any?
+    - count = @teachers.count
+    h2 = "#{count} teacher#{(count > 1 ? 's' : '')} found"
+    = render partial: 'teachers/table'
+
+  - else
+    h2 No teachers found

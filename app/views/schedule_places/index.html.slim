@@ -1,0 +1,36 @@
+.block
+  - if @grouped_schedule_places.any?
+    h1 Listing Schedule Slaces
+
+    table
+      thead
+        tr
+          th
+            | day
+          th
+            | start
+          th
+            | end
+          th
+
+      tbody
+        - @grouped_schedule_places.each do |weekday, schedule_places|
+          - schedule_places.each_with_index do |schedule_place, i|
+            tr class=(i == 0 ? 'first-in-group' : '')
+              td.text
+                - if i == 0
+                  = weekday
+              td = schedule_place.start_time.strftime('%H:%M')
+              td = schedule_place.end_time.strftime('%H:%M')
+              td
+                = link_to 'Edit', schedule_places_path(schedule_place, id: schedule_place.id)
+                = link_to 'Delete', schedule_place, data: { confirm: 'Are you sure?' }, method: :delete
+
+  - else
+    h1 No schedule places yet
+.block
+  h1 Add Schedule Place
+  = render partial: 'schedule_places/form', locals: { schedule_place: @new_schedule_place }
+  - if @edit_schedule_place
+    h1 Edit Schedule Place
+    = render partial: 'schedule_places/form', locals: { schedule_place: @edit_schedule_place }

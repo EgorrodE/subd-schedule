@@ -1,0 +1,38 @@
+@import "bootstrap"
+@import "custom"
+@import "overrides"
+@import "shared"
+
+header
+  background-color: gray
+  margin-bottom: 20px
+  .home-link
+    width: 1400px
+    margin: auto
+    padding: 10px 0px
+    a
+      font-size: 40px
+      color: white
+
+main
+  width: 1200px
+  margin: auto
+  display: flex
+  flex-direction: row
+  .block
+    &:first-child
+      width: 60%
+    &:last-child
+      width: 40%
+    .links
+      .link
+        display: inline-block
+        padding: 10px
+        margin: 5px
+        border-radius: 5px
+        background-color: gray
+        color: white
+        float: left
+        &:hover
+          background-color: #383838
+

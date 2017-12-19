@@ -1,0 +1,17 @@
+.no-flex
+  h1 Weekdays on which least amount of classrooms is used
+  - if @weekdays.any?
+    - count = @weekdays.count
+    h2 = "#{count} weekday#{(count > 1 ? 's' : '')} found"
+    table
+      thead
+        tr
+          th
+            | Name
+          th
+            | Classrooms used
+      tbody
+        - @weekdays.each do |weekday|
+          tr
+            td.text = weekday["name"]
+            td = weekday["mycount"]

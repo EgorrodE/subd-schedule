@@ -1,0 +1,22 @@
+table.teachers
+  thead
+    tr
+      th
+        | Name
+      th
+        | Subjects (Pairs/week)
+      th
+
+  tbody
+    - @teachers.each do |teacher|
+      tr
+        td.text
+          = "#{teacher.last_name} #{teacher.first_name} #{teacher.middle_name} "
+        td.many-to-many
+          .relations
+            - teacher.subjects.uniq.each do |subject|
+              .relation
+                = "#{subject.name} (#{Pair.where(subject_id: subject.id, teacher_id: teacher.id).count})"
+        td
+          = link_to 'Edit', teachers_path(id: teacher.id)
+          = link_to 'Delete', teacher, data: { confirm: 'Are you sure?' }, method: :delete

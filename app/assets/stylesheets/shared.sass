@@ -1,0 +1,64 @@
+table
+  text-align: center
+  margin-bottom: 20px
+  thead
+    tr
+      border-bottom: 2px solid gray
+  thead, tbody
+      tr
+        &.first-in-group
+          border-top: 1px solid gray
+          &:first-child
+            border-top: 0px
+      th, td
+        border-right: 2px solid gray
+        padding: 5px
+        &:last-child
+          border-right: 0px
+        a
+          margin-right: 2px
+      td
+        &.text
+          text-align: left
+        &.many-to-many
+          .relations
+            text-align: left
+            .relation
+              display: inline-block
+              padding: 5px
+              margin: 5px
+              border-radius: 5px
+              background-color: gray
+              color: white
+              .remove-link
+                color: white
+                margin-left: 5px
+          .add-relation
+            select
+              height: 30px
+              background: #f0f0f0
+
+  &.teachers
+    tbody
+      tr
+        border-bottom: 1px solid gray
+        &:last-child
+          border-bottom: 0px
+
+form
+  margin-bottom: 20px
+  .fields
+    display: flex
+    flex-direction: row
+    .form-group
+      margin-right: 10px
+  input
+    &[type="number"]
+      width: 80px
+      &.wide
+        width: 120px
+  select
+    height: 30px
+    background: #f0f0f0
+  .actions
+    padding-left: 30px

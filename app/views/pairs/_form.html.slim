@@ -1,0 +1,24 @@
+= form_for pair, class: 'form' do |f|
+  - if pair.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(pair.errors.count, "error")} prohibited this pair from being saved:"
+      ul
+        - pair.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.label :students_quantity
+    = f.number_field :students_quantity, class: 'form-control'
+  .form-group
+    = f.label :teacher
+    = f.select :teacher_id, @teachers, class: 'form-control'
+  .form-group
+    = f.label :subject
+    = f.select :subject_id, @subjects, class: 'form-control'
+  .form-group
+    = f.label :classroom
+    = f.select :classroom_id, @classrooms, class: 'form-control'
+  .form-group
+    = f.label :schedule_place
+    = f.select :schedule_place_id, @schedule_places, class: 'form-control'
+  = f.submit

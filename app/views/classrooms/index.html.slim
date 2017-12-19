@@ -1,0 +1,41 @@
+.block
+  - if @grouped_classrooms.any?
+    h1 Listing classrooms
+    table
+      thead
+        tr
+          th
+            | Case
+          th
+            | Name
+          th
+            | Type
+          th
+            | Places Avaliable
+          th
+
+      tbody
+        - @grouped_classrooms.each do |case_name, classrooms|
+          - classrooms.each_with_index do |classroom, i|
+            tr class=(i == 0 ? 'first-in-group' : '')
+              td.text
+                - if i == 0
+                  = case_name
+              td.text
+                = classroom.name
+              td.text
+                = classroom.classroom_type.name
+              td
+                = classroom.places_avaliable
+              td
+                = link_to 'Edit', classrooms_path(id: classroom.id)
+                = link_to 'Delete', classroom, data: { confirm: 'Are you sure?' }, method: :delete
+  - else
+    h1 No classrooms yet
+
+.block
+  h1 Add new classroom
+  = render partial: 'classrooms/form', locals: { classroom: @new_classroom }
+  - if @edit_classroom
+    h1 Edit classroom
+    = render partial: 'classrooms/form', locals: { classroom: @edit_classroom }

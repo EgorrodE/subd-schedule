@@ -1,0 +1,14 @@
+.block
+  - if @teachers.any?
+    h1 Listing teachers
+    = render partial: 'teachers/table'
+
+  - else
+    h1 No teachers yet
+
+.block
+  h1 Add new teacher
+  = render partial: 'teachers/form', locals: { teacher: @new_teacher }
+  - if @edit_teacher
+    h1 Edit teacher
+    = render partial: 'teachers/form', locals: { teacher: @edit_teacher }

@@ -1,0 +1,18 @@
+= form_for schedule_place, class: 'form' do |f|
+  - if schedule_place.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(schedule_place.errors.count, "error")} prohibited this schedule_place from being saved:"
+      ul
+        - schedule_place.errors.full_messages.each do |message|
+          li = message
+  .fields
+    .form-group
+      = f.label :weekday
+      = f.select :weekday_id, @weekdays, class: 'form-control'
+    .form-group
+      = f.label :start_time
+      = f.time_select :start_time, start_hour: 7, end_hour: 21, minute_step: 5, class: 'form-control'
+    .form-group
+      = f.label :end_time
+      = f.time_select :end_time, start_hour: 7, end_hour: 21, minute_step: 5, class: 'form-control'
+  .actions = f.submit

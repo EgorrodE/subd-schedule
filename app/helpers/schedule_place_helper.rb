@@ -1,0 +1,2 @@
+module SchedulePlaceHelper
+end
